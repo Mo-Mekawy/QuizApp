@@ -1,0 +1,259 @@
+:root {
+  --main-bg: #333;
+  --alt-bg-dark: #111;
+  --alt-bg-light: #252525;
+  --main-txt-clr: #f5f5f5;
+  --alt-txt-clr: #2196f3;
+  --correct-clr: #4caf50;
+  --wrong-clr: #f44336;
+  --quiz-bg: #795548;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --main-bg: #f5f5f5;
+    --alt-bg-dark: #ccc;
+    --alt-bg-light: #eee;
+    --main-txt-clr: #333;
+    --alt-txt-clr: #1764e6;
+    --correct-clr: #4caf50;
+    --wrong-clr: #f44336;
+    --quiz-bg: #14ccbc;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--main-bg);
+  color: var(--main-txt-clr);
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+/* small screens */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+/* medium screens */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+/* large screens */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* popup styles */
+.pop-up {
+  position: absolute;
+  word-break: break-all;
+  left: 50%;
+  top: 50%;
+  width: 80vw;
+  padding: 2.5rem;
+  transition: transform 150ms linear;
+  background-color: var(--alt-bg-dark);
+  border-radius: 6px;
+  animation: pop-up 250ms cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  z-index: 100;
+}
+
+.blur::before {
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(1.6px);
+  z-index: 1;
+}
+
+@keyframes pop-up {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.popup-msg {
+  text-transform: capitalize;
+  font-size: 1.125rem;
+  text-align: center;
+}
+
+.confirm {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  color: #fff;
+  background-color: var(--alt-txt-clr);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  border: none;
+  border-radius: 0.75em;
+  cursor: pointer;
+}
+
+.confirm:hover {
+  opacity: 0.85;
+}
+
+/* main styles */
+main {
+  margin-block: auto;
+}
+
+#main-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 0.5em auto 0.75em;
+}
+
+.quiz-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding-inline: 1.5rem;
+}
+
+.q-count,
+.category {
+  font-weight: 700;
+  color: var(--alt-txt-clr);
+}
+
+.q-count {
+  font-size: 1.5rem;
+  vertical-align: middle;
+}
+
+.category {
+  text-transform: uppercase;
+}
+
+.quiz {
+  position: relative;
+  padding: 3rem 2rem;
+  background-color: var(--quiz-bg);
+}
+
+.question {
+  text-align: center;
+  border-block: 1px solid var(--alt-txt-clr);
+  padding-block: 0.5em;
+}
+
+.question-num {
+  position: absolute;
+  left: 50%;
+  top: 0.5rem;
+  transform: translateX(-50%);
+  display: grid;
+  place-content: center;
+  width: 30px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px dashed var(--main-txt-clr);
+  font-size: 1.25rem;
+}
+
+.answers {
+  list-style: none;
+  margin: 2rem auto 0;
+}
+
+.answer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem;
+  background-color: var(--alt-bg-light);
+}
+
+.answer.correct {
+  background-color: var(--correct-clr);
+}
+
+.answer.wrong {
+  background-color: var(--wrong-clr);
+}
+
+.answer:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.answer > input[type="radio"] {
+  min-width: 20px;
+  aspect-ratio: 1;
+}
+
+.answer,
+.answer > input[type="radio"],
+.answer > label {
+  cursor: pointer;
+}
+
+.submit-btn {
+  font-size: 1rem;
+  color: #fff;
+  background-color: var(--alt-txt-clr);
+  border-radius: 0.25em;
+  padding: 0.5em 0.75em;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+}
+
+.question-footer {
+  margin: 1.5rem 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+footer {
+  font-size: 1.125rem;
+  padding-block: 1em;
+  background-color: var(--alt-bg-dark);
+  color: var(--main-txt-clr);
+  text-align: center;
+}
+
+footer > a {
+  color: var(--alt-txt-clr);
+  text-decoration: none;
+}
+
+footer > a:hover {
+  color: var(--alt-txt-clr);
+  text-decoration: underline;
+}
